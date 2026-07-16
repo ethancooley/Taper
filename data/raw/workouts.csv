@@ -1,0 +1,61 @@
+workout_id,sport,workout_type,intensity,duration_min,load,title
+0,run,easy run,2,55,48.8,Easy Run - 55min
+1,run,easy run,2,30,26.6,Easy Run - 30min
+2,run,easy run,2,30,26.6,Easy Run - 30min
+3,run,easy run,2,55,48.8,Easy Run - 55min
+4,run,long run,3,115,145.1,Long Run - 115min
+5,run,long run,3,110,138.8,Long Run - 110min
+6,run,long run,3,110,138.8,Long Run - 110min
+7,run,long run,3,95,119.8,Long Run - 95min
+8,run,tempo run,4,65,110.5,Tempo Run - 65min
+9,run,tempo run,4,40,68.0,Tempo Run - 40min
+10,run,tempo run,4,65,110.5,Tempo Run - 65min
+11,run,tempo run,4,65,110.5,Tempo Run - 65min
+12,run,interval session,5,60,132.3,Interval Session - 60min
+13,run,interval session,5,40,88.2,Interval Session - 40min
+14,run,interval session,5,60,132.3,Interval Session - 60min
+15,run,interval session,5,55,121.2,Interval Session - 55min
+16,run,recovery jog,1,20,11.6,Recovery Jog - 20min
+17,run,recovery jog,1,20,11.6,Recovery Jog - 20min
+18,run,recovery jog,1,20,11.6,Recovery Jog - 20min
+19,run,recovery jog,1,25,14.5,Recovery Jog - 25min
+20,bike,endurance ride,2,95,84.4,Endurance Ride - 95min
+21,bike,endurance ride,2,140,124.3,Endurance Ride - 140min
+22,bike,endurance ride,2,60,53.3,Endurance Ride - 60min
+23,bike,endurance ride,2,145,128.8,Endurance Ride - 145min
+24,bike,tempo ride,4,65,110.5,Tempo Ride - 65min
+25,bike,tempo ride,4,85,144.5,Tempo Ride - 85min
+26,bike,tempo ride,4,85,144.5,Tempo Ride - 85min
+27,bike,tempo ride,4,85,144.5,Tempo Ride - 85min
+28,bike,interval ride,5,65,143.3,Interval Ride - 65min
+29,bike,interval ride,5,60,132.3,Interval Ride - 60min
+30,bike,interval ride,5,50,110.2,Interval Ride - 50min
+31,bike,interval ride,5,60,132.3,Interval Ride - 60min
+32,bike,recovery spin,1,40,23.2,Recovery Spin - 40min
+33,bike,recovery spin,1,30,17.4,Recovery Spin - 30min
+34,bike,recovery spin,1,35,20.3,Recovery Spin - 35min
+35,bike,recovery spin,1,45,26.1,Recovery Spin - 45min
+36,swim,technique swim,2,40,35.5,Technique Swim - 40min
+37,swim,technique swim,2,40,35.5,Technique Swim - 40min
+38,swim,technique swim,2,35,31.1,Technique Swim - 35min
+39,swim,technique swim,2,35,31.1,Technique Swim - 35min
+40,swim,endurance swim,3,55,69.4,Endurance Swim - 55min
+41,swim,endurance swim,3,45,56.8,Endurance Swim - 45min
+42,swim,endurance swim,3,45,56.8,Endurance Swim - 45min
+43,swim,endurance swim,3,60,75.7,Endurance Swim - 60min
+44,swim,interval swim,4,40,68.0,Interval Swim - 40min
+45,swim,interval swim,4,50,85.0,Interval Swim - 50min
+46,swim,interval swim,4,50,85.0,Interval Swim - 50min
+47,swim,interval swim,4,60,102.0,Interval Swim - 60min
+48,strength,core session,2,30,26.6,Core Session - 30min
+49,strength,core session,2,20,17.8,Core Session - 20min
+50,strength,core session,2,35,31.1,Core Session - 35min
+51,strength,core session,2,40,35.5,Core Session - 40min
+52,strength,full body strength,3,30,37.8,Full Body Strength - 30min
+53,strength,full body strength,3,45,56.8,Full Body Strength - 45min
+54,strength,full body strength,3,30,37.8,Full Body Strength - 30min
+55,strength,full body strength,3,50,63.1,Full Body Strength - 50min
+56,strength,mobility session,1,30,17.4,Mobility Session - 30min
+57,strength,mobility session,1,30,17.4,Mobility Session - 30min
+58,strength,mobility session,1,25,14.5,Mobility Session - 25min
+59,strength,mobility session,1,20,11.6,Mobility Session - 20min
