@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taper — responsible workout recommendations</title>
+<style>
+  :root {
+    --bg: #0f1412; --card: #18201c; --ink: #e8efe9; --muted: #93a59a;
+    --green: #4fc98c; --red: #e5646c; --amber: #e0a84f; --line: #263029;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink);
+         font: 15px/1.5 "Segoe UI", system-ui, sans-serif; padding: 32px 16px; }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 28px; letter-spacing: -0.5px; }
+  h1 span { color: var(--green); }
+  .sub { color: var(--muted); margin: 6px 0 24px; }
+  form { background: var(--card); border: 1px solid var(--line);
+         border-radius: 12px; padding: 20px; display: flex; flex-wrap: wrap;
+         gap: 16px; align-items: flex-end; }
+  label { display: block; font-size: 12px; color: var(--muted);
+          text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  select, input { background: var(--bg); color: var(--ink);
+          border: 1px solid var(--line); border-radius: 8px;
+          padding: 8px 10px; font-size: 14px; width: 130px; }
+  button { background: var(--green); color: #08130d; font-weight: 600;
+           border: 0; border-radius: 8px; padding: 10px 22px;
+           font-size: 15px; cursor: pointer; }
+  button:hover { filter: brightness(1.1); }
+  .acwr { margin: 20px 0 8px; font-size: 14px; color: var(--muted); }
+  .acwr b { color: var(--ink); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+  .col h2 { font-size: 15px; margin-bottom: 10px; }
+  .col.naive h2 { color: var(--red); } .col.safe h2 { color: var(--green); }
+  .card { background: var(--card); border: 1px solid var(--line);
+          border-radius: 10px; padding: 12px 14px; margin-bottom: 8px;
+          display: flex; justify-content: space-between; align-items: center; }
+  .card .t { font-weight: 600; }
+  .card .m { color: var(--muted); font-size: 12.5px; }
+  .pill { font-size: 12px; font-weight: 700; padding: 3px 9px;
+          border-radius: 99px; white-space: nowrap; }
+  .ok   { background: rgba(79,201,140,.15); color: var(--green); }
+  .warn { background: rgba(224,168,79,.18); color: var(--amber); }
+  .bad  { background: rgba(229,100,108,.18); color: var(--red); }
+  .note { color: var(--muted); font-size: 12.5px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Taper<span>.</span></h1>
+  <p class="sub">A workout recommender that optimizes for what you can safely absorb,
+     not just what you like. Naive vs constrained, side by side.</p>
+
+  <form id="intake">
+    <div><label>Sport focus</label>
+      <select id="sport">
+        <option value="run">Run</option><option value="bike">Bike</option>
+        <option value="swim">Swim</option>
+      </select></div>
+    <div><label>Goal hrs/week</label>
+      <input id="goal" type="number" value="6" min="1" max="20" step="0.5"></div>
+    <div><label>Recent hrs/week</label>
+      <input id="recent" type="number" value="2" min="0" max="20" step="0.5"></div>
+    <div><label>Max intensity (1–5)</label>
+      <input id="maxint" type="number" value="5" min="1" max="5"></div>
+    <div><button type="button" onclick="go()">Recommend</button></div>
+  </form>
+
+  <div id="results"></div>
+  <p class="note">ACWR = acute:chronic workload ratio. Values above 1.5 are
+     associated with elevated injury risk. The constrained system re-ranks
+     relevance candidates to stay inside a safe ramp and rotate workout types.</p>
+</div>
+
+<script>
+function pill(a) {
+  if (a > 1.5) return `<span class="pill bad">ACWR ${a}</span>`;
+  if (a > 1.3) return `<span class="pill warn">ACWR ${a}</span>`;
+  return `<span class="pill ok">ACWR ${a}</span>`;
+}
+function card(w) {
+  return `<div class="card"><div>
+    <div class="t">${w.title}</div>
+    <div class="m">${w.sport} · intensity ${w.intensity}/5 · load ${w.load}</div>
+  </div>${pill(w.acwr_after)}</div>`;
+}
+async function go() {
+  const body = {
+    sports: [document.getElementById('sport').value],
+    max_intensity: +document.getElementById('maxint').value,
+    weekly_hours: +document.getElementById('goal').value,
+    recent_weekly_hours: +document.getElementById('recent').value,
+  };
+  const res = await fetch('/recommend', { method: 'POST',
+    headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body) });
+  const d = await res.json();
+  document.getElementById('results').innerHTML = `
+    <p class="acwr">Current training state: <b>ACWR ${d.current_acwr}</b></p>
+    <div class="cols">
+      <div class="col naive"><h2>Naive (relevance only)</h2>
+        ${d.naive.map(card).join('')}</div>
+      <div class="col safe"><h2>Constrained (relevance + safety)</h2>
+        ${d.constrained.map(card).join('')}</div>
+    </div>`;
+}
+</script>
+</body>
+</html>
